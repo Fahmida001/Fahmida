@@ -1,6 +1,6 @@
 ---
 title: "Fahmida"
-image: fahmida.jpg
+image: Fahmida.jpg
 toc: true
 about:
   template: trestles
