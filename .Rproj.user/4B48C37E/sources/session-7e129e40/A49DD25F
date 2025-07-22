@@ -1,27 +1,26 @@
 {
-    "id": "84C7F283",
-    "path": "C:/Users/fahmi/Downloads/dimred_Penguins (1).qmd",
-    "project_path": null,
+    "id": "A49DD25F",
+    "path": "~/GitHub/Fahmida/projects/project_title.qmd",
+    "project_path": "projects/project_title.qmd",
     "type": "quarto_markdown",
     "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1752805883944.0,
+    "created": 1752856776771.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 8,
     "properties": {
-        "chunk_output_type": "console",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "100,6",
-        "scrollLine": "93"
+        "cursorPosition": "1,17",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1752805874,
+    "lastKnownWriteTime": 1752857386,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1752805874,
+    "last_content_update": 1752857386453,
     "read_only": false,
     "read_only_alternatives": []
 }
