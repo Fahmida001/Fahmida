@@ -12,10 +12,8 @@ website:
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    css: styles.scss
+    theme: styles.scss
+    mainfont: Jost
     toc: true
 
 
