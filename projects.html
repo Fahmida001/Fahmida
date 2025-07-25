@@ -79,9 +79,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
       
-      searchColumns: ["listing-title","listing-author"],
+      searchColumns: ["listing-date","listing-title","listing-author"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -205,6 +205,10 @@ window.Quarto = {
 <tr>
 
 <th>
+Date
+</th>
+
+<th>
 Title
 </th>
 
@@ -216,12 +220,15 @@ Author
 </thead>
 <tbody class="list">
 
-<tr data-index="0" data-listing-file-modified-sort="1753467143546" data-listing-reading-time-sort="1" data-listing-word-count-sort="3" data-listing-title-sort="Gene Dosage Effects of Chromosome 12 Trisomy in Human Induced Pluripotent Stem Cells (iPSCs)" data-listing-filename-sort="project_title.qmd">
+<tr data-index="0" data-listing-date-sort="1753660800000" data-listing-file-modified-sort="1753468715725" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="2" data-listing-title-sort="Gene Dosage Effects of Chromosome 12 Trisomy in Human Induced Pluripotent Stem Cells (iPSCs)" data-listing-filename-sort="project_title.qmd">
+<td>
+<span class="listing-date">07-28-2025</span>
+</td>
 <td>
 <a href="./projects/project_title.html" class="title listing-title">Gene Dosage Effects of Chromosome 12 Trisomy in Human Induced Pluripotent Stem Cells (iPSCs)</a>
 </td>
 <td>
-<span class="listing-author">&nbsp;</span>
+<span class="listing-author">Fahmida Sultana</span>
 </td>
 
 </tr>
