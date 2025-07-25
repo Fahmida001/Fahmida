@@ -1,7 +1,7 @@
 ---
 title: "Gene Dosage Effects of Chromosome 12 Trisomy in Human Induced Pluripotent Stem Cells (iPSCs)"
-author: 
- - name: "Fahmida Sultana"
+author:
+  - name: "Fahmida Sultana"
     affiliation: "Department of Cell Biology, OUHSC"
 date: 2025-07-28
 format:
@@ -11,10 +11,10 @@ format:
     toc-depth: 2
     number-sections: false
     theme: default
-    
+
 execute:
   echo: true
-
+  
 ---
 ## **Project Overview**
 
