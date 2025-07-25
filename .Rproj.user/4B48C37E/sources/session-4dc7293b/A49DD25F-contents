@@ -3,7 +3,11 @@ title: "Gene Dosage Effects of Chromosome 12 Trisomy in Human Induced Pluripoten
 author: "Fahmida Sultana"
 affiliation: "Department of Cell Biology, OUHSC"
 date: 2025-07-28
-format: html
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
 execute:
   echo: true
 
