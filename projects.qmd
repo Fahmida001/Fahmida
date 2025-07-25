@@ -6,6 +6,7 @@ listing:
   contents: projects
   sort: "date asc"
   type: table
+  fields: [title, author]
   categories: false
   sort-ui: false
   filter-ui: false
