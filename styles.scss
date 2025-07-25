@@ -22,3 +22,28 @@ $footer-bg: $cream; // footer
 // Inline code
 $code-bg: $cream; // inline code background color
 $code-color: $orange; // inline code text color
+
+
+/* Justify paragraph text */
+p {
+  text-align: justify;
+}
+
+/* Style the TOC title ("On this page") */
+nav.toc-title {
+  font-weight: bold;
+  color: $dark-green; // uses your defined theme color
+  font-size: 1.1em;
+}
+
+/* Style the TOC links */
+nav.toc ul li a {
+  color: $gray;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav.toc ul li a:hover {
+  color: $orange;
+  text-decoration: underline;
+}

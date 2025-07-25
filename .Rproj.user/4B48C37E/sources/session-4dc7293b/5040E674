@@ -3,7 +3,7 @@
     "path": "~/GitHub/Fahmida/styles.scss",
     "project_path": "styles.scss",
     "type": "css",
-    "hash": "0",
+    "hash": "919213422",
     "contents": "",
     "dirty": false,
     "created": 1753199021744.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "2,6",
-        "scrollLine": "0"
+        "cursorPosition": "49,0",
+        "scrollLine": "32"
     },
     "folds": "",
-    "lastKnownWriteTime": 1753199666,
+    "lastKnownWriteTime": 1753475286,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1753199666430,
+    "last_content_update": 1753475286781,
     "read_only": false,
     "read_only_alternatives": []
 }
