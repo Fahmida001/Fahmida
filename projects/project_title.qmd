@@ -1,6 +1,11 @@
 ---
 title: "Gene Dosage Effects of Chromosome 12 Trisomy in Human Induced Pluripotent Stem Cells (iPSCs)"
+author: "Fahmida Sultana"
+date: 2025-07-28
+format: html
+execute: true
 ---
+
 
 About this site
 ```{r}
