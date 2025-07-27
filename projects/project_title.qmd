@@ -153,14 +153,85 @@ ggplot(var_df, aes(x = PC, y = Variance)) +
 
 
 ```{r}
-ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
-  geom_point(size = 4) +
-  theme_minimal()
+# Load libraries
+library(tidyverse)
+library(tidymodels)
+library(readr)
+library(ggplot2)
+
+# Set a seed for reproducibility
+set.seed(956)
+
+# Load the data
+rna <- read_csv("BulkRNAseq_with_Chr.csv")
+
+
+# Extract just the numeric expression values (samples only)
+expr_data <- rna %>%
+  select(gene_symbol, P3_1, P3_2, P3_3, P33_1, P33_2, P33_3)
+
+# Transpose the data: samples as rows, genes as columns
+expr_long <- expr_data %>%
+  pivot_longer(-gene_symbol, names_to = "Sample", values_to = "Expression") %>%
+  pivot_wider(names_from = gene_symbol, values_from = Expression)
+
+# Add group info (Disomic vs Trisomic)
+expr_long <- expr_long %>%
+  mutate(Group = case_when(
+    str_starts(Sample, "P3_") ~ "Disomic",
+    str_starts(Sample, "P33_") ~ "Trisomic"
+  ))
+
+# Build the PCA Recipe
+rna_pca_recipe <- recipe(~ ., data = expr_long) %>%
+  update_role(Sample, Group, new_role = "id") %>%
+  step_naomit(all_predictors()) %>%
+  step_normalize(all_predictors()) %>%
+  step_pca(all_predictors(), id = "pca")
+
+```
+```{r}
+# Prep and apply the recipe
+rna_pca_prep <- prep(rna_pca_recipe, training = expr_long)
+rna_pca_bake <- bake(rna_pca_prep, new_data = NULL)
 
 ```
 
 ```{r}
-library(tidyverse)
+# View variable contributions to each PC
+rna_pca_prep %>%
+  tidy(id = "pca", type = "coef")
+
+# View variance explained by each PC
+rna_pca_prep %>%
+  tidy(id = "pca", type = "variance")
+
+```
+
+```{r}
+rna_pca_prep %>%
+  tidy(id = "pca", type = "variance") %>%
+  filter(terms == "percent variance") %>%
+  mutate(component = as.numeric(component)) %>%  # Convert component to numeric
+  ggplot(aes(x = component, y = value)) +
+  geom_col(fill = "lightpink1") +
+  ylab("% of total variance") +
+  xlab("Principal Component (PC)") +
+  scale_x_continuous(breaks = 1:6) +  # Explicit x-axis ticks: 1 to 6
+  geom_text(aes(label = round(value, 1)), vjust = 1.5)
+
+```
+```{r}
+ggplot(rna_pca_bake, aes(PC1, PC2, color = Group, shape = Group)) +
+  geom_point(size = 4, alpha = 0.8) +
+  theme_minimal() +
+  labs(title = "PCA of Disomic vs Trisomic iPSCs",
+       x = "PC1", y = "PC2")
+
+```
+
+
+```{r}
 
 # Step 1: Filter only Chromosome 12 genes
 chr12_genes <- rna %>%
@@ -193,6 +264,16 @@ ggplot(chr12_genes, aes(x = log2FoldChange, y = -log10(pAdj), color = Regulation
   theme_minimal()
 
 ```
+
+
+
+
+
+
+
+
+
+
 
 ```{r}
 

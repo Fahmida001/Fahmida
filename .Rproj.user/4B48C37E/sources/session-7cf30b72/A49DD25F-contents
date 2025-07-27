@@ -230,24 +230,8 @@ ggplot(rna_pca_bake, aes(PC1, PC2, color = Group, shape = Group)) +
 
 ```
 
-```{r}
-
-top_contributors <- rna_pca_prep %>%
-  tidy(id = "pca", type = "coef") %>%
-  group_by(component) %>%
-  slice_max(order_by = abs(value), n = 10)
-
-ggplot(top_contributors, aes(abs(value), terms, fill = value > 0)) +
-  geom_col() +
-  facet_wrap(~component, scales = "free_y") +
-  scale_fill_manual(values = c("#b6dfe2", "#0A537D")) +
-  labs(x = "Absolute Contribution", y = NULL, fill = "Positive") +
-  theme_minimal()
-
-```
 
 ```{r}
-library(tidyverse)
 
 # Step 1: Filter only Chromosome 12 genes
 chr12_genes <- rna %>%

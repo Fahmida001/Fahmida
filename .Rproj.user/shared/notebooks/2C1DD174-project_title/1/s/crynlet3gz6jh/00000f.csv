@@ -1,4 +1,0 @@
-"0","ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +"
-"0","  geom_point(size = 4) +"
-"0","  theme_minimal()"
-"0",""
