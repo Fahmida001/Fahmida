@@ -25,10 +25,14 @@ In this project, we focus on trisomy of chromosome 12 (T12), a frequently observ
 
 Understanding the gene dosage effects of trisomy 12 in iPSCs not only provides insights into the biology of stem cell maintenance and genomic instability but also has implications for regenerative medicine and disease modeling, where genomic integrity is crucial.
 
-#Load the packages
+#Load required libraries
 ```{r}
 library(tidyverse)
 library(ggplot2)
+library(readxl)
+library(dplyr)
+library(biomaRt)
+library(writexl)
 ```
 
 
