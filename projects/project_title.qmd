@@ -120,5 +120,44 @@ ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
   ) +
   theme_minimal()
 
+# PCA variance summary
+pca_var_df <- as.data.frame(summary(pca_res)$importance[1:2, ])
+pca_var_df <- tibble::rownames_to_column(pca_var_df, var = "Metric")
+
+# View the table
+pca_var_df
+
+# Extract proportion of variance explained
+variance_explained <- summary(pca_res)$importance[2, ]  # Second row = proportion of variance
+pc_names <- names(variance_explained)
+
+# Create a data frame for plotting
+var_df <- data.frame(
+  PC = pc_names,
+  Variance = variance_explained * 100  # Convert to percentage
+)
+
+# Bar plot of % variance explained
+ggplot(var_df, aes(x = PC, y = Variance)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(
+    title = "Variance Explained by Principal Components",
+    x = "Principal Component",
+    y = "% of Variance"
+  ) +
+  theme_minimal()
+
 ```
+
+
+
+```{r}
+ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
+  geom_point(size = 4) +
+  theme_minimal()
+
+```
+
+
+
 
