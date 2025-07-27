@@ -48,7 +48,7 @@ glimpse(rna)
 
 ## Summarize Dataset
 
-### A.How many genes are upregulated or downregulated in trisomic iPSCs?
+### A. How many genes are upregulated or downregulated in trisomic iPSCs?
 
 We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value < 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.
 
