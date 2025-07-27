@@ -3,7 +3,7 @@
     "path": "~/GitHub/Fahmida/projects/project_title.qmd",
     "project_path": "projects/project_title.qmd",
     "type": "quarto_markdown",
-    "hash": "739108840",
+    "hash": "2953203032",
     "contents": "",
     "dirty": false,
     "created": 1752856776771.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "34,271",
-        "scrollLine": "32"
+        "cursorPosition": "28,0",
+        "scrollLine": "26"
     },
     "folds": "",
-    "lastKnownWriteTime": 1753592840,
+    "lastKnownWriteTime": 1753593909,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1753592840525,
+    "last_content_update": 1753593909358,
     "read_only": false,
     "read_only_alternatives": []
 }
