@@ -33,6 +33,7 @@ library(tidyverse)
 ```
 ## Load and Preview the RNA-seq Dataset
 
+We load the CSV file using `read_csv()` and use `head()` and `glimpse()` to confirm successful import and examine the structure.
 The dataset `BulkRNAseq_with_Chr.csv` contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.
 ```{r}
 # Read CSV and preview first few rows
@@ -40,6 +41,9 @@ library(readr)
 
 rna <- read_csv("../data/BulkRNAseq_with_Chr.csv")
 head(rna)
+
+glimpse(rna)
+
 ```
 
 ## Summarize Dataset
