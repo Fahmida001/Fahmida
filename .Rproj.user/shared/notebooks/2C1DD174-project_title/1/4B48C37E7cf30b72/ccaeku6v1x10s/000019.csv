@@ -1,0 +1,7 @@
+"0",""
+"0","# PCA variance summary"
+"0","pca_var_df <- as.data.frame(summary(pca_res)$importance[1:2, ])"
+"0","pca_var_df <- tibble::rownames_to_column(pca_var_df, var = ""Metric"")"
+"0",""
+"0","# View the table"
+"0","pca_var_df"
