@@ -42,3 +42,11 @@ rna <- read_csv("../data/BulkRNAseq_with_Chr.csv")
 head(rna)
 ```
 
+## Summarize Dataset
+
+In this section, we explore summary statistics and characteristics of the RNA-seq dataset.
+
+```{r}
+
+```
+
