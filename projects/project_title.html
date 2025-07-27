@@ -200,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Aneuploidy, the presence of an abnormal number of chromosomes, is a common genomic alteration observed in both developmental disorders and cancer. While most aneuploidies are detrimental to cellular function, some specific chromosomal gains may confer selective growth advantages in certain contexts. Human induced pluripotent stem cells (iPSCs) serve as a powerful model system to study the effects of aneuploidy due to their self-renewal capacity and potential for differentiation.</p>
 <p>In this project, we focus on trisomy of chromosome 12 (T12), a frequently observed aneuploidy in cultured iPSCs. This chromosomal gain is particularly intriguing because it has been associated with increased proliferation and stemness, and is often detected in iPSC lines during long-term culture. By investigating transcriptomic data, we aim to explore how the extra copy of chromosome 12 alters gene expressions, and how these molecular changes contribute to altered cellular phenotypes.</p>
 <p>Understanding the gene dosage effects of trisomy 12 in iPSCs not only provides insights into the biology of stem cell maintenance and genomic instability but also has implications for regenerative medicine and disease modeling, where genomic integrity is crucial.</p>
-<p>#Load the packages</p>
+<p>#Load required libraries</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -216,6 +216,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"../data/BulkRNAseq_with_Chr.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 12916 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (4): name, gene_symbol, band, chromosome_name
+dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rna)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 19
+  name  gene_symbol baseMean baseMeanA baseMeanB foldChange log2FoldChange lfcSE
+  &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt; &lt;dbl&gt;
+1 ENSG… HDAC2-AS2      1400.      371.     2430.      6.55            2.71 0.107
+2 ENSG… LINC00458      1931.      530.     3331.      6.28            2.65 0.108
+3 ENSG… ENSG000002…    3206.      651.     5761.      8.84            3.14 0.147
+4 ENSG… CEBPZOS         496.      891.      101.      0.113          -3.14 0.158
+5 ENSG… LINC02188       455.      150.      760.      5.07            2.34 0.140
+6 ENSG… WNT5B           617.      255.      980.      3.85            1.94 0.122
+# ℹ 11 more variables: stat &lt;dbl&gt;, pvalue &lt;dbl&gt;, pAdj &lt;dbl&gt;, P3_1 &lt;dbl&gt;,
+#   P3_2 &lt;dbl&gt;, P3_3 &lt;dbl&gt;, P33_1 &lt;dbl&gt;, P33_2 &lt;dbl&gt;, P33_3 &lt;dbl&gt;, band &lt;chr&gt;,
+#   chromosome_name &lt;chr&gt;</code></pre>
+</div>
 </div>
 
 
