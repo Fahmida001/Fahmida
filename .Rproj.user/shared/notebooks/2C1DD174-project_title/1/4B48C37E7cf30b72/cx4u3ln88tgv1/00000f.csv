@@ -1,0 +1,4 @@
+"0","# Prep and apply the recipe"
+"0","rna_pca_prep <- prep(rna_pca_recipe, training = expr_long)"
+"0","rna_pca_bake <- bake(rna_pca_prep, new_data = NULL)"
+"0",""

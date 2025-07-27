@@ -1,0 +1,46 @@
+"0","# Load libraries
+library(tidyverse)
+library(tidymodels)
+library(readr)
+library(ggplot2)
+
+# Set a seed for reproducibility
+set.seed(956)
+
+# Load the data
+rna <- read_csv(""BulkRNAseq_with_Chr.csv"")
+"
+"2","[1mRows: [22m[34m12916[39m [1mColumns: [22m[34m19[39m
+"
+"2","[36m──[39m [1mColumn specification[22m [36m─────────────────────────────────────────────[39m
+[1mDelimiter:[22m "",""
+[31mchr[39m  (4): name, gene_symbol, band, chromosome_name
+[32mdbl[39m (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldCha...
+"
+"2","
+[36mℹ[39m Use `spec()` to retrieve the full column specification for this data.
+[36mℹ[39m Specify the column types or set `show_col_types = FALSE` to quiet this message.
+"
+"0","# Extract just the numeric expression values (samples only)"
+"0","expr_data <- rna %>%"
+"0","  select(gene_symbol, P3_1, P3_2, P3_3, P33_1, P33_2, P33_3)"
+"0",""
+"0","# Transpose the data: samples as rows, genes as columns"
+"0","expr_long <- expr_data %>%"
+"0","  pivot_longer(-gene_symbol, names_to = ""Sample"", values_to = ""Expression"") %>%"
+"0","  pivot_wider(names_from = gene_symbol, values_from = Expression)"
+"0",""
+"0","# Add group info (Disomic vs Trisomic)"
+"0","expr_long <- expr_long %>%"
+"0","  mutate(Group = case_when("
+"0","    str_starts(Sample, ""P3_"") ~ ""Disomic"","
+"0","    str_starts(Sample, ""P33_"") ~ ""Trisomic"""
+"0","  ))"
+"0",""
+"0","# Build the PCA Recipe"
+"0","rna_pca_recipe <- recipe(~ ., data = expr_long) %>%"
+"0","  update_role(Sample, Group, new_role = ""id"") %>%"
+"0","  step_naomit(all_predictors()) %>%"
+"0","  step_normalize(all_predictors()) %>%"
+"0","  step_pca(all_predictors(), id = ""pca"")"
+"0",""

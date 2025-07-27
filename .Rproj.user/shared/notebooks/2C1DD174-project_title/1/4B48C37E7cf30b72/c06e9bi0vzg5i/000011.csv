@@ -1,0 +1,4 @@
+"0",""
+"0","# View variance explained by each PC"
+"0","rna_pca_prep %>%"
+"0","  tidy(id = ""pca"", type = ""variance"")"
