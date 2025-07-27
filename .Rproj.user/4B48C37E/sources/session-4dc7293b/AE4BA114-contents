@@ -1,0 +1,44 @@
+# Load libraries
+library(ggplot2)
+library(dplyr)
+library(readr)
+
+# Load the filtered DEG file
+deg_data <- read.csv("Final_Ch 1-22_DEGs_filtered_log2FC_abs_gt_log2_1.5_padj_lt_0.05.csv")
+
+# Keep only chromosomes 1–22 and convert chromosome to integer
+deg_data <- deg_data %>%
+  filter(chr %in% as.character(1:22)) %>%
+  mutate(chr = as.integer(chr))
+
+# Order genes by chromosome and genomic start position
+deg_data <- deg_data %>%
+  arrange(chr, start) %>%
+  mutate(global_pos = row_number())
+
+# Compute chromosome boundary positions and midpoint labels
+chr_lengths <- deg_data %>%
+  group_by(chr) %>%
+  summarise(chr_start = min(global_pos), chr_end = max(global_pos)) %>%
+  mutate(label_pos = (chr_start + chr_end) / 2)
+
+# Plot with vibrant colors
+ggplot(deg_data, aes(x = global_pos, y = log2FoldChange)) +
+  geom_line(alpha = 0.5, color = "#1f77b4") +  # vibrant blue for raw signal
+  geom_smooth(method = "loess", span = 0.1, se = FALSE, color = "#e31a1c", size = 1.2) +  # vibrant red for trend
+  geom_vline(xintercept = chr_lengths$chr_end, linetype = "dotted", color = "purple") +
+  scale_x_continuous(
+    breaks = chr_lengths$label_pos,
+    labels = chr_lengths$chr
+  ) +
+  labs(
+    title = "Gene Expression Ratio: Trisomic vs Disomic iPSCs",
+    subtitle = "log2FoldChange = log2(Trisomic / Disomic)",
+    x = "Chromosomal location (chr 1–22)",
+    y = "Log2 Fold Change"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 0),
+    panel.grid.major.x = element_blank()
+  )
