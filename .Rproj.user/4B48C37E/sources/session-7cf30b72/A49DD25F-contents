@@ -30,6 +30,13 @@ Understanding the gene dosage effects of trisomy 12 in iPSCs not only provides i
 ```{r}
 # Load tidyverse for wrangling, plotting, and file reading
 library(tidyverse)
+
+# Load tidymodels for modeling
+library(tidymodels)
+
+# Explicitly load recipes to ensure step_pca() is found
+library(recipes)
+
 ```
 ## Load and Preview the RNA-seq Dataset
 
