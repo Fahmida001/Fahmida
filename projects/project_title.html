@@ -284,8 +284,8 @@ $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "
 </section>
 <section id="summarize-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="summarize-dataset">Summarize Dataset</h2>
-<section id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="level3">
-<h3 class="anchored" data-anchor-id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">How many genes are upregulated or downregulated in trisomic iPSCs?</h3>
+<section id="a.how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="level3">
+<h3 class="anchored" data-anchor-id="a.how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">A.How many genes are upregulated or downregulated in trisomic iPSCs?</h3>
 <p>We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value &lt; 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Define thresholds</span></span>
@@ -325,6 +325,41 @@ $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "
 <div>
 <figure class="figure">
 <p><img src="project_title_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract expression matrix (only the columns with expression values)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>expr_matrix <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(P33_1, P33_2, P33_3, P3_1, P3_2, P3_3) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Transpose the matrix: samples as rows, genes as columns</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>expr_t <span class="ot">&lt;-</span> <span class="fu">t</span>(expr_matrix)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform PCA</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>pca_res <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(expr_t, <span class="at">scale. =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame with PCA scores</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>pca_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pca_res<span class="sc">$</span>x)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add sample group labels (in same order as columns in original matrix)</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>pca_df<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Trisomic"</span>, <span class="st">"Trisomic"</span>, <span class="st">"Trisomic"</span>, <span class="st">"Disomic"</span>, <span class="st">"Disomic"</span>, <span class="st">"Disomic"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot PCA</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pca_df, <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> Group)) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"PCA of Gene Expression: Trisomic vs. Disomic iPSCs"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">"PC1 ("</span>, <span class="fu">round</span>(<span class="fu">summary</span>(pca_res)<span class="sc">$</span>importance[<span class="dv">2</span>, <span class="dv">1</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"%)"</span>),</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">paste0</span>(<span class="st">"PC2 ("</span>, <span class="fu">round</span>(<span class="fu">summary</span>(pca_res)<span class="sc">$</span>importance[<span class="dv">2</span>, <span class="dv">2</span>] <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>), <span class="st">"%)"</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="project_title_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
