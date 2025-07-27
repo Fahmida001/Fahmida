@@ -170,16 +170,17 @@ rna_pca_prep %>%
 
 ```
 ```{r}
-# Plot the PCA
 
+# Plot PCA
 ggplot(rna_pca_bake, aes(x = PC1, y = PC2, color = Group)) +
   geom_point(size = 4) +
   theme_minimal() +
   labs(
     title = "PCA of Gene Expression: Trisomic vs. Disomic iPSCs",
-    x = paste0("PC1 (", round(summary(pca_res)$importance[2, 1] * 100, 1), "%)"),
-    y = paste0("PC2 (", round(summary(pca_res)$importance[2, 2] * 100, 1), "%)")
+    x = paste0("PC1 (", round(pc1_var, 1), "%)"),
+    y = paste0("PC2 (", round(pc2_var, 1), "%)")
   )
+
  
 ```
 
