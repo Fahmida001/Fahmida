@@ -28,7 +28,6 @@ Understanding the gene dosage effects of trisomy 12 in iPSCs not only provides i
 #Load the packages
 ```{r}
 library(tidyverse)
-library(DESeq2)
 library(ggplot2)
 ```
 
