@@ -29,10 +29,12 @@ Understanding the gene dosage effects of trisomy 12 in iPSCs not only provides i
 ```{r}
 library(tidyverse)
 library(ggplot2)
-library(readxl)
-library(dplyr)
-library(biomaRt)
-library(writexl)
 ```
 
+```{r}
+library(readr)
+
+rna <- read_csv("../data/BulkRNAseq_with_Chr.csv")
+head(rna)
+```
 
