@@ -46,7 +46,43 @@ head(rna)
 
 In this section, we explore summary statistics and characteristics of the RNA-seq dataset.
 
+### A. How many genes are upregulated or downregulated in trisomic ch-12 iPSCs?
+We define upregulated genes as those with a positive `log2FoldChange` and downregulated as those with a negative `log2FoldChange`, comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.
 ```{r}
+# Count how many genes are up- or down-regulated
+
+log2fc_cutoff <- log2(1.5)
+padj_cutoff <- 0.05
+
+# Categorize genes
+rna <- rna %>%
+  mutate(
+    Regulation = case_when(
+      log2FoldChange >= log2fc_cutoff & pAdj < padj_cutoff ~ "Upregulated",
+      log2FoldChange <= -log2fc_cutoff & pAdj < padj_cutoff ~ "Downregulated",
+      TRUE ~ "Not Significant"
+    )
+  )
+
+# Summarize and include all chromosomes (excluding NA)
+reg_summary <- rna %>%
+  filter(Regulation != "Not Significant", !is.na(chromosome_name)) %>%
+  count(chromosome_name, Regulation) %>%
+  complete(
+    chromosome_name = factor(c(as.character(1:22), "X", "Y"), levels = c(as.character(1:22), "X", "Y")),
+    Regulation,
+    fill = list(n = 0)
+  )
+
+# Plot
+ggplot(reg_summary, aes(x = chromosome_name, y = n, fill = Regulation)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Up- and Downregulated Genes per Chromosome",
+    x = "Chromosome",
+    y = "Number of Genes"
+  ) +
+  theme_minimal()
 
 ```
 

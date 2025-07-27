@@ -1,0 +1,10 @@
+"0","# Count how many genes are up- or down-regulated"
+"0","table("
+"0","  Upregulated = rna$log2FoldChange > 1,"
+"0","  Downregulated = rna$log2FoldChange < -1"
+"0",")"
+"1","           Downregulated
+Upregulated FALSE  TRUE
+      FALSE 12770    39
+      TRUE    107     0
+"
