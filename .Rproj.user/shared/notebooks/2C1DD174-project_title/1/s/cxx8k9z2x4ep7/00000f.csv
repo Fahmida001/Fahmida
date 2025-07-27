@@ -1,6 +1,0 @@
-"0","ggplot(rna_pca_bake, aes(PC1, PC2, color = Group, shape = Group)) +"
-"0","  geom_point(size = 4, alpha = 0.8) +"
-"0","  theme_minimal() +"
-"0","  labs(title = ""PCA of Disomic vs Trisomic iPSCs"","
-"0","       x = ""PC1"", y = ""PC2"")"
-"0",""

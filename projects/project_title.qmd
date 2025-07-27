@@ -94,66 +94,6 @@ ggplot(reg_summary, aes(x = chromosome_name, y = n, fill = Regulation)) +
 
 ```{r}
 
-# Extract expression matrix (only the columns with expression values)
-expr_matrix <- rna %>%
-  select(P33_1, P33_2, P33_3, P3_1, P3_2, P3_3) %>%
-  as.matrix()
-
-# Transpose the matrix: samples as rows, genes as columns
-expr_t <- t(expr_matrix)
-
-# Perform PCA
-pca_res <- prcomp(expr_t, scale. = TRUE)
-
-# Create a data frame with PCA scores
-pca_df <- as.data.frame(pca_res$x)
-
-# Add sample group labels (in same order as columns in original matrix)
-pca_df$Group <- c("Trisomic", "Trisomic", "Trisomic", "Disomic", "Disomic", "Disomic")
-
-# Plot PCA
-ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
-  geom_point(size = 4) +
-  labs(
-    title = "PCA of Gene Expression: Trisomic vs. Disomic iPSCs",
-    x = paste0("PC1 (", round(summary(pca_res)$importance[2, 1] * 100, 1), "%)"),
-    y = paste0("PC2 (", round(summary(pca_res)$importance[2, 2] * 100, 1), "%)")
-  ) +
-  theme_minimal()
-
-# PCA variance summary
-pca_var_df <- as.data.frame(summary(pca_res)$importance[1:2, ])
-pca_var_df <- tibble::rownames_to_column(pca_var_df, var = "Metric")
-
-# View the table
-pca_var_df
-
-# Extract proportion of variance explained
-variance_explained <- summary(pca_res)$importance[2, ]  # Second row = proportion of variance
-pc_names <- names(variance_explained)
-
-# Create a data frame for plotting
-var_df <- data.frame(
-  PC = pc_names,
-  Variance = variance_explained * 100  # Convert to percentage
-)
-
-# Bar plot of % variance explained
-ggplot(var_df, aes(x = PC, y = Variance)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(
-    title = "Variance Explained by Principal Components",
-    x = "Principal Component",
-    y = "% of Variance"
-  ) +
-  theme_minimal()
-
-```
-
-
-
-```{r}
-
 # Set a seed for reproducibility
 set.seed(956)
 
@@ -203,29 +143,40 @@ rna_pca_prep %>%
 
 ```
 
+
+
 ```{r}
+# Plot the percent of variance explained by each principal component
 rna_pca_prep %>%
   tidy(id = "pca", type = "variance") %>%
   filter(terms == "percent variance") %>%
-  mutate(component = as.numeric(component)) %>%  # Convert component to numeric
+  mutate(component = as.numeric(component)) %>%  
   ggplot(aes(x = component, y = value)) +
   geom_col(fill = "steelblue") +
   ylab("% of total variance") +
   xlab("Principal Component (PC)") +
-  scale_x_continuous(breaks = 1:6) +  # Explicit x-axis ticks: 1 to 6
-  geom_text(aes(label = round(value, 1)), vjust = 1.5)
+  scale_x_continuous(breaks = 1:6) +  
+  geom_text(aes(label = round(value, 1)), vjust = 1.5)+
+  ggtitle("Variance Explained by Principal Components") +
+  theme_minimal()
+
 
 ```
 ```{r}
-ggplot(rna_pca_bake, aes(PC1, PC2, color = Group, shape = Group)) +
-  geom_point(size = 4, alpha = 0.8) +
-  theme_minimal() +
-  labs(title = "PCA of Disomic vs Trisomic iPSCs",
-       x = "PC1", y = "PC2")
+# Plot the PCA
 
+ggplot(rna_pca_bake, aes(x = PC1, y = PC2, color = Group)) +
+  geom_point(size = 4) +
+  theme_minimal() +
+  labs(
+    title = "PCA of Gene Expression: Trisomic vs. Disomic iPSCs",
+    x = paste0("PC1 (", round(summary(pca_res)$importance[2, 1] * 100, 1), "%)"),
+    y = paste0("PC2 (", round(summary(pca_res)$importance[2, 2] * 100, 1), "%)")
+  )
+ 
 ```
 
-
+### C. Volcano plot for ch-12 
 ```{r}
 
 # Step 1: Filter only Chromosome 12 genes
