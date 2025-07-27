@@ -225,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-and-preview-the-rna-seq-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</h2>
-<p>The dataset <code>BulkRNAseq_with_Chr.csv</code> contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.</p>
+<p>We load the CSV file using <code>read_csv()</code> and use <code>head()</code> and <code>glimpse()</code> to confirm successful import and examine the structure. The dataset <code>BulkRNAseq_with_Chr.csv</code> contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV and preview first few rows</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
@@ -256,49 +256,71 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 #   P3_2 &lt;dbl&gt;, P3_3 &lt;dbl&gt;, P33_1 &lt;dbl&gt;, P33_2 &lt;dbl&gt;, P33_3 &lt;dbl&gt;, band &lt;chr&gt;,
 #   chromosome_name &lt;chr&gt;</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(rna)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 12,916
+Columns: 19
+$ name            &lt;chr&gt; "ENSG00000228624", "ENSG00000234787", "ENSG00000254339…
+$ gene_symbol     &lt;chr&gt; "HDAC2-AS2", "LINC00458", "ENSG00000254339", "CEBPZOS"…
+$ baseMean        &lt;dbl&gt; 1400.4867, 1930.8693, 3206.3738, 495.8898, 454.7371, 6…
+$ baseMeanA       &lt;dbl&gt; 371.2333, 530.4333, 651.3333, 890.6333, 149.7667, 254.…
+$ baseMeanB       &lt;dbl&gt; 2429.7000, 3331.2667, 5761.4333, 101.1667, 759.7000, 9…
+$ foldChange      &lt;dbl&gt; 6.5489, 6.2818, 8.8441, 0.1132, 5.0707, 3.8492, 4.2759…
+$ log2FoldChange  &lt;dbl&gt; 2.7112, 2.6512, 3.1447, -3.1432, 2.3422, 1.9446, 2.096…
+$ lfcSE           &lt;dbl&gt; 0.1069, 0.1077, 0.1474, 0.1580, 0.1405, 0.1220, 0.1464…
+$ stat            &lt;dbl&gt; 25.3538, 24.6142, 21.3295, -19.8895, 16.6748, 15.9350,…
+$ pvalue          &lt;dbl&gt; 8.15e-142, 8.89e-134, 6.05e-101, 5.02e-88, 2.00e-62, 3…
+$ pAdj            &lt;dbl&gt; 1.49e-137, 1.09e-129, 5.55e-97, 3.68e-84, 9.17e-59, 1.…
+$ P3_1            &lt;dbl&gt; 399.3, 587.6, 505.4, 843.3, 146.7, 259.6, 160.5, 146.7…
+$ P3_2            &lt;dbl&gt; 360.2, 495.3, 743.5, 898.4, 147.6, 266.0, 144.5, 112.0…
+$ P3_3            &lt;dbl&gt; 354.2, 508.4, 705.1, 930.2, 155.0, 239.2, 140.9, 107.5…
+$ P33_1           &lt;dbl&gt; 2418.2, 3290.6, 5890.2, 114.0, 777.1, 932.5, 652.7, 61…
+$ P33_2           &lt;dbl&gt; 2513.5, 3414.9, 5489.2, 81.5, 813.2, 1032.8, 677.0, 60…
+$ P33_3           &lt;dbl&gt; 2357.4, 3288.3, 5904.9, 108.0, 688.8, 974.1, 574.0, 57…
+$ band            &lt;chr&gt; "q21", "q14.3", "q23.3", "p22.2", "q24.1", "p13.33", N…
+$ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "12",…</code></pre>
+</div>
 </div>
 </section>
 <section id="summarize-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="summarize-dataset">Summarize Dataset</h2>
-<p>In this section, we explore summary statistics and characteristics of the RNA-seq dataset.</p>
-<section id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ch-12-ipscs" class="level3">
-<h3 class="anchored" data-anchor-id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ch-12-ipscs">A. How many genes are upregulated or downregulated in trisomic ch-12 iPSCs?</h3>
-<p>We define upregulated genes as those with a positive <code>log2FoldChange</code> and downregulated as those with a negative <code>log2FoldChange</code>, comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.</p>
+<section id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="level3">
+<h3 class="anchored" data-anchor-id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">How many genes are upregulated or downregulated in trisomic iPSCs?</h3>
+<p>We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value &lt; 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count how many genes are up- or down-regulated</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>log2fc_cutoff <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="fl">1.5</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>padj_cutoff <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Categorize genes</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Regulation =</span> <span class="fu">case_when</span>(</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      log2FoldChange <span class="sc">&gt;=</span> log2fc_cutoff <span class="sc">&amp;</span> pAdj <span class="sc">&lt;</span> padj_cutoff <span class="sc">~</span> <span class="st">"Upregulated"</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span>log2fc_cutoff <span class="sc">&amp;</span> pAdj <span class="sc">&lt;</span> padj_cutoff <span class="sc">~</span> <span class="st">"Downregulated"</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Not Significant"</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize and include all chromosomes (excluding NA)</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>reg_summary <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Regulation <span class="sc">!=</span> <span class="st">"Not Significant"</span>, <span class="sc">!</span><span class="fu">is.na</span>(chromosome_name)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(chromosome_name, Regulation) <span class="sc">%&gt;%</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">chromosome_name =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>), <span class="st">"X"</span>, <span class="st">"Y"</span>), <span class="at">levels =</span> <span class="fu">c</span>(<span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>), <span class="st">"X"</span>, <span class="st">"Y"</span>)),</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    Regulation,</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="dv">0</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(reg_summary, <span class="fu">aes</span>(<span class="at">x =</span> chromosome_name, <span class="at">y =</span> n, <span class="at">fill =</span> Regulation)) <span class="sc">+</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Up- and Downregulated Genes per Chromosome"</span>,</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Chromosome"</span>,</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Genes"</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Define thresholds</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>log2fc_cutoff <span class="ot">&lt;-</span> <span class="fu">log2</span>(<span class="fl">1.5</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>padj_cutoff <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Categorize genes</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>rna <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Regulation =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>      log2FoldChange <span class="sc">&gt;=</span> log2fc_cutoff <span class="sc">&amp;</span> pAdj <span class="sc">&lt;</span> padj_cutoff <span class="sc">~</span> <span class="st">"Upregulated"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>      log2FoldChange <span class="sc">&lt;=</span> <span class="sc">-</span>log2fc_cutoff <span class="sc">&amp;</span> pAdj <span class="sc">&lt;</span> padj_cutoff <span class="sc">~</span> <span class="st">"Downregulated"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Not Significant"</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Filter out NA chromosome names and define correct chromosome order</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>valid_chromosomes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">as.character</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>), <span class="st">"X"</span>, <span class="st">"Y"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Summarize data per chromosome and regulation category</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>reg_summary <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Regulation <span class="sc">!=</span> <span class="st">"Not Significant"</span>, chromosome_name <span class="sc">%in%</span> valid_chromosomes) <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">chromosome_name =</span> <span class="fu">factor</span>(chromosome_name, <span class="at">levels =</span> valid_chromosomes)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(chromosome_name, Regulation) <span class="sc">%&gt;%</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(chromosome_name, Regulation, <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">n =</span> <span class="dv">0</span>))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 5: Plot</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(reg_summary, <span class="fu">aes</span>(<span class="at">x =</span> chromosome_name, <span class="at">y =</span> n, <span class="at">fill =</span> Regulation)) <span class="sc">+</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Up- and Downregulated Genes in Trisomic vs. Disomic iPSCs by Chromosome"</span>,</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Chromosome"</span>,</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Genes"</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
