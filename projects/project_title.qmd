@@ -30,7 +30,9 @@ Understanding the gene dosage effects of trisomy 12 in iPSCs not only provides i
 library(tidyverse)
 library(ggplot2)
 ```
+## Load and Preview the RNA-seq Dataset
 
+The dataset `BulkRNAseq_with_Chr.csv` contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.
 ```{r}
 library(readr)
 
