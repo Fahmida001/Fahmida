@@ -15,6 +15,7 @@ format:
     theme: styles.scss
     mainfont: Jost
     toc: true
+    toc-depth: 3
 
 
 

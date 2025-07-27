@@ -48,7 +48,7 @@ glimpse(rna)
 
 ## Summarize Dataset
 
-### How many genes are upregulated or downregulated in trisomic iPSCs?
+### A.How many genes are upregulated or downregulated in trisomic iPSCs?
 
 We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value < 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.
 
@@ -85,6 +85,38 @@ ggplot(reg_summary, aes(x = chromosome_name, y = n, fill = Regulation)) +
     title = "Up- and Downregulated Genes in Trisomic vs. Disomic iPSCs by Chromosome",
     x = "Chromosome",
     y = "Number of Genes"
+  ) +
+  theme_minimal()
+
+```
+
+
+```{r}
+
+# Extract expression matrix (only the columns with expression values)
+expr_matrix <- rna %>%
+  select(P33_1, P33_2, P33_3, P3_1, P3_2, P3_3) %>%
+  as.matrix()
+
+# Transpose the matrix: samples as rows, genes as columns
+expr_t <- t(expr_matrix)
+
+# Perform PCA
+pca_res <- prcomp(expr_t, scale. = TRUE)
+
+# Create a data frame with PCA scores
+pca_df <- as.data.frame(pca_res$x)
+
+# Add sample group labels (in same order as columns in original matrix)
+pca_df$Group <- c("Trisomic", "Trisomic", "Trisomic", "Disomic", "Disomic", "Disomic")
+
+# Plot PCA
+ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
+  geom_point(size = 4) +
+  labs(
+    title = "PCA of Gene Expression: Trisomic vs. Disomic iPSCs",
+    x = paste0("PC1 (", round(summary(pca_res)$importance[2, 1] * 100, 1), "%)"),
+    y = paste0("PC2 (", round(summary(pca_res)$importance[2, 2] * 100, 1), "%)")
   ) +
   theme_minimal()
 
