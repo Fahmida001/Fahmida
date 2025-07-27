@@ -151,6 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><strong>Project Overview</strong></a></li>
+  <li><a href="#load-and-preview-the-rna-seq-dataset" id="toc-load-and-preview-the-rna-seq-dataset" class="nav-link" data-scroll-target="#load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</a></li>
   </ul>
 </nav>
     </div>
@@ -217,6 +218,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="load-and-preview-the-rna-seq-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</h2>
+<p>The dataset <code>BulkRNAseq_with_Chr.csv</code> contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
