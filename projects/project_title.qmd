@@ -153,11 +153,6 @@ ggplot(var_df, aes(x = PC, y = Variance)) +
 
 
 ```{r}
-# Load libraries
-library(tidyverse)
-library(tidymodels)
-library(readr)
-library(ggplot2)
 
 # Set a seed for reproducibility
 set.seed(956)
@@ -214,7 +209,7 @@ rna_pca_prep %>%
   filter(terms == "percent variance") %>%
   mutate(component = as.numeric(component)) %>%  # Convert component to numeric
   ggplot(aes(x = component, y = value)) +
-  geom_col(fill = "lightpink1") +
+  geom_col(fill = "steelblue") +
   ylab("% of total variance") +
   xlab("Principal Component (PC)") +
   scale_x_continuous(breaks = 1:6) +  # Explicit x-axis ticks: 1 to 6
@@ -264,15 +259,6 @@ ggplot(chr12_genes, aes(x = log2FoldChange, y = -log10(pAdj), color = Regulation
   theme_minimal()
 
 ```
-
-
-
-
-
-
-
-
-
 
 
 ```{r}

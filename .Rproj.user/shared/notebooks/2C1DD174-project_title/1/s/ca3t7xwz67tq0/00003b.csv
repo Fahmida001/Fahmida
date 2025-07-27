@@ -3,7 +3,7 @@
 "0","  filter(terms == ""percent variance"") %>%"
 "0","  mutate(component = as.numeric(component)) %>%  # Convert component to numeric"
 "0","  ggplot(aes(x = component, y = value)) +"
-"0","  geom_col(fill = ""lightpink1"") +"
+"0","  geom_col(fill = ""steelblue"") +"
 "0","  ylab(""% of total variance"") +"
 "0","  xlab(""Principal Component (PC)"") +"
 "0","  scale_x_continuous(breaks = 1:6) +  # Explicit x-axis ticks: 1 to 6"

@@ -1,15 +1,9 @@
-"0","# Load libraries
-library(tidyverse)
-library(tidymodels)
-library(readr)
-library(ggplot2)
-
-# Set a seed for reproducibility
-set.seed(956)
-
-# Load the data
-rna <- read_csv(""BulkRNAseq_with_Chr.csv"")
-"
+"0",""
+"0","# Set a seed for reproducibility"
+"0","set.seed(956)"
+"0",""
+"0","# Load the data"
+"0","rna <- read_csv(""BulkRNAseq_with_Chr.csv"")"
 "2","[1mRows: [22m[34m12916[39m [1mColumns: [22m[34m19[39m
 "
 "2","[36m──[39m [1mColumn specification[22m [36m─────────────────────────────────────────────[39m
