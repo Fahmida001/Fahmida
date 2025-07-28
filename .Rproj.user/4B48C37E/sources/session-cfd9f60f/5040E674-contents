@@ -47,3 +47,8 @@ nav.toc ul li a:hover {
   color: $orange;
   text-decoration: underline;
 }
+
+/* Change main title color */
+.quarto-title h1.title {
+  color: #2e3a59;
+}

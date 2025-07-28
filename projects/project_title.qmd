@@ -24,6 +24,8 @@ Aneuploidy, or the presence of an abnormal number of chromosomes, is frequently 
 In this project, we analyze transcriptomic changes associated with T12 in iPSCs to understand how gene dosage impacts cellular behavior. These insights are critical for ensuring genomic integrity in iPSC-based applications, particularly in regenerative medicine and disease modeling.
 
 ![](trisomy.png){fig-align="center" width="60%"}
+---
+
 ## Procedure
 
 I performed bulk RNA sequencing (RNA-seq) on human induced pluripotent stem cells (iPSCs) with disomic and trisomic chromosome 12 to investigate transcriptomic differences associated with gene dosage. Total RNA was extracted from both cell types and sequenced using high-throughput methods. The resulting data were processed and analyzed to identify differentially expressed genes between trisomic and disomic chromosome 12 iPSCs.
