@@ -227,72 +227,56 @@ ggplot(chr12_genes, aes(x = log2FoldChange, y = -log10(pAdj), color = Regulation
   ) +
   theme_minimal()
 
+
+
 ```
 
-
 ```{r}
-
-library(tidyverse)
-library(ggrepel)  # for better label positioning
-
-# Step 1: Filter only Chromosome 12 genes
-chr12_genes <- rna %>%
-  filter(chromosome_name == "12")
-
-# Step 2: Define thresholds
-log2fc_cutoff <- log2(1.5)
-padj_cutoff <- 0.05
-
-# Step 3: Categorize genes
-chr12_genes <- chr12_genes %>%
-  mutate(Regulation = case_when(
-    log2FoldChange >= log2fc_cutoff & pAdj < padj_cutoff ~ "Upregulated",
-    log2FoldChange <= -log2fc_cutoff & pAdj < padj_cutoff ~ "Downregulated",
-    TRUE ~ "Not Significant"
-  ))
-
-# Step 4: Select top 20 up and 20 downregulated genes to label
-top_genes <- chr12_genes %>%
+# Top 10 upregulated genes
+top_up <- chr12_genes %>%
   filter(Regulation == "Upregulated") %>%
   arrange(pAdj, desc(log2FoldChange)) %>%
-  slice_head(n = 20) %>%
-  bind_rows(
-    chr12_genes %>%
-      filter(Regulation == "Downregulated") %>%
-      arrange(pAdj, log2FoldChange) %>%
-      slice_head(n = 20)
-  )
+  slice_head(n = 10)
 
-# Step 5: Volcano plot with triangles instead of circles
-ggplot(chr12_genes, aes(x = log2FoldChange, y = -log10(pAdj), color = Regulation)) +
-  geom_point(alpha = 0.8, size = 2, shape = 17) +  # triangle shape
-  geom_text_repel(
-    data = top_genes,
-    aes(label = gene_symbol),
-    size = 3,
-    box.padding = 0.5,
-    point.padding = 0.3,
-    max.overlaps = Inf,
-    segment.color = "gray40"
-  ) +
-  scale_color_manual(
-    values = c(
-      "Upregulated" = "red",
-      "Downregulated" = "blue",
-      "Not Significant" = "gray"
-    )
-  ) +
-  geom_vline(xintercept = c(-log2fc_cutoff, log2fc_cutoff), linetype = "dashed", color = "black") +
-  geom_hline(yintercept = -log10(padj_cutoff), linetype = "dashed", color = "black") +
+# Top 10 downregulated genes
+top_down <- chr12_genes %>%
+  filter(Regulation == "Downregulated") %>%
+  arrange(pAdj, log2FoldChange) %>%
+  slice_head(n = 10)
+
+# Combine into one table
+top_genes_table <- bind_rows(
+  top_up %>% mutate(Direction = "Upregulated"),
+  top_down %>% mutate(Direction = "Downregulated")
+) %>%
+  select(gene_symbol, log2FoldChange, pAdj, Direction)
+
+# Print the table
+top_genes_table
+
+```
+```{r}
+library(ggplot2)
+library(forcats)
+library(dplyr)
+
+# Filter out genes with names starting with "ENSG" (i.e., unmapped Ensembl IDs)
+top_genes_plot <- top_genes_table %>%
+  filter(!grepl("^ENSG", gene_symbol)) %>%             # remove unannotated Ensembl IDs
+  mutate(gene_symbol = fct_reorder(gene_symbol, log2FoldChange))  # reorder for plotting
+
+# Plot
+ggplot(top_genes_plot, aes(x = gene_symbol, y = log2FoldChange, fill = Direction)) +
+  geom_col(show.legend = TRUE) +
+  coord_flip() +
+  scale_fill_manual(values = c("Upregulated" = "magenta", "Downregulated" = "blue")) +
   labs(
-    title = "Volcano Plot of Chromosome 12 Genes",
-    subtitle = "Trisomic vs. Disomic iPSCs",
-    x = "Log2 Fold Change",
-    y = "-Log10 Adjusted p-value"
+    title = "Top Upregulated and Downregulated Chromosome 12 Genes",
+    x = "Gene Symbol",
+    y = "Log2 Fold Change"
   ) +
   theme_minimal()
 
 
 ```
-
 
