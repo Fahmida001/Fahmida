@@ -151,7 +151,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><strong>Project Overview</strong></a></li>
-  <li><a href="#load-required-libraries" id="toc-load-required-libraries" class="nav-link" data-scroll-target="#load-required-libraries">Load Required Libraries</a></li>
   <li><a href="#load-and-preview-the-rna-seq-dataset" id="toc-load-and-preview-the-rna-seq-dataset" class="nav-link" data-scroll-target="#load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</a></li>
   <li><a href="#summarize-dataset" id="toc-summarize-dataset" class="nav-link" data-scroll-target="#summarize-dataset">Summarize Dataset</a></li>
   <li><a href="#which-genes-on-chromosome-12-are-most-updownregulated" id="toc-which-genes-on-chromosome-12-are-most-updownregulated" class="nav-link" data-scroll-target="#which-genes-on-chromosome-12-are-most-updownregulated">Which genes on Chromosome 12 are most up/downregulated?</a></li>
@@ -209,15 +208,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="trisomy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-<p>##<strong>Procedure</strong> I performed bulk RNA sequencing (RNA-seq) on human induced pluripotent stem cells (iPSCs) with disomic and trisomic chromosome 12 to investigate transcriptomic differences associated with gene dosage. Total RNA was extracted from both cell types and sequenced using high-throughput methods. The resulting data is processed and analyzed to identify differentially expressed genes between trisomic and disomic ch-12 iPSCs.</p>
+<p>##<strong>Procedure</strong></p>
+<p>I performed bulk RNA sequencing (RNA-seq) on human induced pluripotent stem cells (iPSCs) with disomic and trisomic chromosome 12 to investigate transcriptomic differences associated with gene dosage. Total RNA was extracted from both cell types and sequenced using high-throughput methods. The resulting data is processed and analyzed to identify differentially expressed genes between trisomic and disomic ch-12 iPSCs.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="bulk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+<p><img src="Bulk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
-</section>
-<section id="load-required-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="load-required-libraries">Load Required Libraries</h2>
+<p>##<strong>Load Required Libraries</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse for wrangling, plotting, and file reading</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -258,6 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-and-preview-the-rna-seq-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</h2>
 <p>We load the CSV file using <code>read_csv()</code> and use <code>head()</code> and <code>glimpse()</code> to confirm successful import and examine the structure. The dataset <code>BulkRNAseq_with_Chr.csv</code> contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.</p>
+<p>Glimpse at the Data</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV and preview first few rows</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
