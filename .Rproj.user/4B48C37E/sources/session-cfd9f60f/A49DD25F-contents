@@ -297,7 +297,7 @@ ggplot(top_genes_plot, aes(x = gene_symbol, y = log2FoldChange, fill = Direction
 
 ## A Little iPSC Humor 🎭
 
-![Stem cell trisomy meme](last.png){fig-align="center" width="40%"}
+![Stem cell trisomy meme](last.png){fig-align="center" width="30%"}
 
 
 
