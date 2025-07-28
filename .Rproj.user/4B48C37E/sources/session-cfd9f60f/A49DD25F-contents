@@ -17,7 +17,7 @@ execute:
   echo: true
   
 ---
-## **Project Overview**
+## Project Overview
 
 Aneuploidy, or the presence of an abnormal number of chromosomes, is frequently observed in developmental disorders and cancer. Trisomy 12 (T12), a common chromosomal gain in cultured human induced pluripotent stem cells (iPSCs), has been associated with enhanced proliferation and stemness. iPSCs offer a powerful model to investigate such genomic alterations due to their capacity for self-renewal and differentiation.
 
@@ -41,7 +41,7 @@ library(recipes)
 
 ```
 
-## **Glimpse at the RNA-seq Data**
+## Glimpse at the RNA-seq Data
 
 I have loaded the CSV file using read_csv() and use head() and glimpse() to confirm successful import and examine the structure of the dataset.
 
@@ -60,7 +60,7 @@ glimpse(rna)
 
 ## Summarize & Interpret Dataset
 
-### 🔍 A. How many genes are upregulated or downregulated in trisomic iPSCs?
+### A. How many genes are upregulated or downregulated in trisomic iPSCs?
 
 We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value < 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.
 
