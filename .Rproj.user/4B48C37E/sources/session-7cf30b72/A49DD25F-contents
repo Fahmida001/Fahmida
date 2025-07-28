@@ -194,7 +194,9 @@ ggplot(rna_pca_bake, aes(x = PC1, y = PC2, color = Group)) +
  
 ```
 
-### C. Volcano plot for ch-12 
+## Which genes on Chromosome 12 are most up/downregulated?
+
+### C. Volcano plot of ch-12 
 ```{r}
 
 # Step 1: Filter only Chromosome 12 genes
@@ -231,6 +233,9 @@ ggplot(chr12_genes, aes(x = log2FoldChange, y = -log10(pAdj), color = Regulation
 
 ```
 
+## What are the top 10 most dysregulated genes on Chr12?
+
+
 ```{r}
 # Top 10 upregulated genes
 top_up <- chr12_genes %>%
@@ -255,6 +260,9 @@ top_genes_table <- bind_rows(
 top_genes_table
 
 ```
+
+
+
 ```{r}
 library(forcats)
 library(dplyr)
