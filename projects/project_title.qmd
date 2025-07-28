@@ -27,7 +27,7 @@ In this project, we analyze transcriptomic changes associated with T12 in iPSCs 
 
 ---
 
-##**Load Required Libraries**
+## **Load Required Libraries**
 
 ```{r}
 # Load tidyverse for wrangling, plotting, and file reading
@@ -58,7 +58,7 @@ glimpse(rna)
 
 ```
 
-##**Summarize & Interpret Dataset**
+## **Summarize & Interpret Dataset**
 
 ### A. How many genes are upregulated or downregulated in trisomic iPSCs?
 
