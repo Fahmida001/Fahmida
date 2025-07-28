@@ -27,11 +27,12 @@ In this project, we analyze transcriptomic changes associated with T12 in iPSCs 
 
 
 ##**Procedure**
+
 I performed bulk RNA sequencing (RNA-seq) on human induced pluripotent stem cells (iPSCs) with disomic and trisomic chromosome 12 to investigate transcriptomic differences associated with gene dosage. Total RNA was extracted from both cell types and sequenced using high-throughput methods. The resulting data is processed and analyzed to identify differentially expressed genes between trisomic and disomic ch-12 iPSCs.
 
-![](bulk.png){fig-align="center" width="60%"}
+![](Bulk.png){fig-align="center" width="60%"}
 
-## Load Required Libraries
+##**Load Required Libraries**
 
 ```{r}
 # Load tidyverse for wrangling, plotting, and file reading
@@ -48,6 +49,8 @@ library(recipes)
 
 We load the CSV file using `read_csv()` and use `head()` and `glimpse()` to confirm successful import and examine the structure.
 The dataset `BulkRNAseq_with_Chr.csv` contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.
+
+Glimpse at the Data
 ```{r}
 # Read CSV and preview first few rows
 library(readr)
