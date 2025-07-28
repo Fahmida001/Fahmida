@@ -242,7 +242,7 @@ ggplot(chr12_genes, aes(x = log2FoldChange, y = -log10(pAdj), color = Regulation
 
 ```
 
-## 6.2 What are the top 10 most dysregulated genes on Trisomic Chr12?
+## 🔍 6.2 What are the top 10 most dysregulated genes on Trisomic Chr12?
 
 ```{r}
 # Top 10 upregulated genes
