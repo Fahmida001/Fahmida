@@ -150,9 +150,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><strong>Project Overview</strong></a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
   <li><a href="#load-required-libraries" id="toc-load-required-libraries" class="nav-link" data-scroll-target="#load-required-libraries"><strong>Load Required Libraries</strong></a></li>
-  <li><a href="#glimpse-at-the-rna-seq-data" id="toc-glimpse-at-the-rna-seq-data" class="nav-link" data-scroll-target="#glimpse-at-the-rna-seq-data"><strong>Glimpse at the RNA-seq Data</strong></a></li>
+  <li><a href="#glimpse-at-the-rna-seq-data" id="toc-glimpse-at-the-rna-seq-data" class="nav-link" data-scroll-target="#glimpse-at-the-rna-seq-data">Glimpse at the RNA-seq Data</a></li>
   <li><a href="#summarize-interpret-dataset" id="toc-summarize-interpret-dataset" class="nav-link" data-scroll-target="#summarize-interpret-dataset">Summarize &amp; Interpret Dataset</a></li>
   <li><a href="#which-genes-on-chromosome-12-are-most-updownregulated" id="toc-which-genes-on-chromosome-12-are-most-updownregulated" class="nav-link" data-scroll-target="#which-genes-on-chromosome-12-are-most-updownregulated">Which genes on Chromosome 12 are most up/downregulated?</a></li>
   <li><a href="#what-are-the-top-10-most-dysregulated-genes-on-chr12" id="toc-what-are-the-top-10-most-dysregulated-genes-on-chr12" class="nav-link" data-scroll-target="#what-are-the-top-10-most-dysregulated-genes-on-chr12">What are the top 10 most dysregulated genes on Chr12?</a></li>
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="project-overview" class="level2">
-<h2 class="anchored" data-anchor-id="project-overview"><strong>Project Overview</strong></h2>
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
 <p>Aneuploidy, or the presence of an abnormal number of chromosomes, is frequently observed in developmental disorders and cancer. Trisomy 12 (T12), a common chromosomal gain in cultured human induced pluripotent stem cells (iPSCs), has been associated with enhanced proliferation and stemness. iPSCs offer a powerful model to investigate such genomic alterations due to their capacity for self-renewal and differentiation.</p>
 <p>In this project, we analyze transcriptomic changes associated with T12 in iPSCs to understand how gene dosage impacts cellular behavior. These insights are critical for ensuring genomic integrity in iPSC-based applications, particularly in regenerative medicine and disease modeling.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -251,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="glimpse-at-the-rna-seq-data" class="level2">
-<h2 class="anchored" data-anchor-id="glimpse-at-the-rna-seq-data"><strong>Glimpse at the RNA-seq Data</strong></h2>
+<h2 class="anchored" data-anchor-id="glimpse-at-the-rna-seq-data">Glimpse at the RNA-seq Data</h2>
 <p>I have loaded the CSV file using read_csv() and use head() and glimpse() to confirm successful import and examine the structure of the dataset.</p>
 <p>The dataset BulkRNAseq_with_Chr.csv contains normalized gene expression values, log₂ fold changes, adjusted p-values, and chromosome annotations for over 12,000 genes from disomic and trisomic iPSCs.</p>
 <div class="cell">
@@ -313,7 +313,7 @@ $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "
 <section id="summarize-interpret-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="summarize-interpret-dataset">Summarize &amp; Interpret Dataset</h2>
 <section id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="level3">
-<h3 class="anchored" data-anchor-id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">🔍 A. How many genes are upregulated or downregulated in trisomic iPSCs?</h3>
+<h3 class="anchored" data-anchor-id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">A. How many genes are upregulated or downregulated in trisomic iPSCs?</h3>
 <p>We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value &lt; 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Define thresholds</span></span>
