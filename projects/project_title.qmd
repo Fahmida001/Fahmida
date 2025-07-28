@@ -24,9 +24,6 @@ Aneuploidy, or the presence of an abnormal number of chromosomes, is frequently 
 In this project, we analyze transcriptomic changes associated with T12 in iPSCs to understand how gene dosage impacts cellular behavior. These insights are critical for ensuring genomic integrity in iPSC-based applications, particularly in regenerative medicine and disease modeling.
 
 ![](trisomy.png){fig-align="center" width="60%"}
-
----
-
 ## **Load Required Libraries**
 
 ```{r}
