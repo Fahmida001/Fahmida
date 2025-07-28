@@ -155,14 +155,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#load-required-libraries" id="toc-load-required-libraries" class="nav-link" data-scroll-target="#load-required-libraries">2 Load Required Libraries</a></li>
   <li><a href="#glimpse-at-the-rna-seq-data" id="toc-glimpse-at-the-rna-seq-data" class="nav-link" data-scroll-target="#glimpse-at-the-rna-seq-data">3 Glimpse at the RNA-seq Data</a></li>
   <li><a href="#summarize-interpret-dataset" id="toc-summarize-interpret-dataset" class="nav-link" data-scroll-target="#summarize-interpret-dataset">4 Summarize &amp; Interpret Dataset</a></li>
-  <li><a href="#how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" id="toc-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="nav-link" data-scroll-target="#how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">4.1 How many genes are upregulated or downregulated in trisomic iPSCs?</a></li>
+  <li><a href="#how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" id="toc-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="nav-link" data-scroll-target="#how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">🔍 4.1 How many genes are upregulated or downregulated in trisomic iPSCs?</a></li>
   <li><a href="#is-there-a-clear-clustering-of-ipscs-by-karyotype-trisomic-vs.-disomic-in-the-principal-component-space" id="toc-is-there-a-clear-clustering-of-ipscs-by-karyotype-trisomic-vs.-disomic-in-the-principal-component-space" class="nav-link" data-scroll-target="#is-there-a-clear-clustering-of-ipscs-by-karyotype-trisomic-vs.-disomic-in-the-principal-component-space">5 Is there a clear clustering of iPSCs by karyotype (trisomic vs.&nbsp;disomic) in the principal component space?</a></li>
-  <li><a href="#prep-the-data-build-the-pca-recipe" id="toc-prep-the-data-build-the-pca-recipe" class="nav-link" data-scroll-target="#prep-the-data-build-the-pca-recipe">5.1 Prep the Data &amp; Build the PCA Recipe</a></li>
-  <li><a href="#apply-the-recipe" id="toc-apply-the-recipe" class="nav-link" data-scroll-target="#apply-the-recipe">5.2 Apply the Recipe</a></li>
-  <li><a href="#plot-the-percent-of-variance" id="toc-plot-the-percent-of-variance" class="nav-link" data-scroll-target="#plot-the-percent-of-variance">5.3 Plot the Percent of Variance</a></li>
-  <li><a href="#plot-pca" id="toc-plot-pca" class="nav-link" data-scroll-target="#plot-pca">5.4 Plot PCA</a></li>
+  <li><a href="#prep-the-data-build-the-pca-recipe" id="toc-prep-the-data-build-the-pca-recipe" class="nav-link" data-scroll-target="#prep-the-data-build-the-pca-recipe">🔍 5.1 Prep the Data &amp; Build the PCA Recipe</a></li>
+  <li><a href="#apply-the-recipe" id="toc-apply-the-recipe" class="nav-link" data-scroll-target="#apply-the-recipe">🔍 5.2 Apply the Recipe</a></li>
+  <li><a href="#plot-the-percent-of-variance" id="toc-plot-the-percent-of-variance" class="nav-link" data-scroll-target="#plot-the-percent-of-variance">🔍 5.3 Plot the Percent of Variance</a></li>
+  <li><a href="#plot-pca" id="toc-plot-pca" class="nav-link" data-scroll-target="#plot-pca">🔍 5.4 Plot PCA</a></li>
   <li><a href="#which-genes-on-chromosome-12-are-most-updownregulated" id="toc-which-genes-on-chromosome-12-are-most-updownregulated" class="nav-link" data-scroll-target="#which-genes-on-chromosome-12-are-most-updownregulated">6 Which genes on Chromosome 12 are most up/downregulated?</a></li>
-  <li><a href="#volcano-plot-of-ch-12" id="toc-volcano-plot-of-ch-12" class="nav-link" data-scroll-target="#volcano-plot-of-ch-12">6.1 Volcano plot of ch-12</a></li>
+  <li><a href="#volcano-plot-of-ch-12" id="toc-volcano-plot-of-ch-12" class="nav-link" data-scroll-target="#volcano-plot-of-ch-12">🔍 6.1 Volcano plot of ch-12</a></li>
   <li><a href="#what-are-the-top-10-most-dysregulated-genes-on-trisomic-chr12" id="toc-what-are-the-top-10-most-dysregulated-genes-on-trisomic-chr12" class="nav-link" data-scroll-target="#what-are-the-top-10-most-dysregulated-genes-on-trisomic-chr12">🔍 6.2 What are the top 10 most dysregulated genes on Trisomic Chr12?</a></li>
   </ul>
 </nav>
@@ -319,7 +319,7 @@ $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "
 <h2 class="anchored" data-anchor-id="summarize-interpret-dataset">4 Summarize &amp; Interpret Dataset</h2>
 </section>
 <section id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="level2">
-<h2 class="anchored" data-anchor-id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">4.1 How many genes are upregulated or downregulated in trisomic iPSCs?</h2>
+<h2 class="anchored" data-anchor-id="how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">🔍 4.1 How many genes are upregulated or downregulated in trisomic iPSCs?</h2>
 <p>We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value &lt; 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Define thresholds</span></span>
@@ -368,7 +368,7 @@ $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "
 <h2 class="anchored" data-anchor-id="is-there-a-clear-clustering-of-ipscs-by-karyotype-trisomic-vs.-disomic-in-the-principal-component-space">5 Is there a clear clustering of iPSCs by karyotype (trisomic vs.&nbsp;disomic) in the principal component space?</h2>
 </section>
 <section id="prep-the-data-build-the-pca-recipe" class="level2">
-<h2 class="anchored" data-anchor-id="prep-the-data-build-the-pca-recipe">5.1 Prep the Data &amp; Build the PCA Recipe</h2>
+<h2 class="anchored" data-anchor-id="prep-the-data-build-the-pca-recipe">🔍 5.1 Prep the Data &amp; Build the PCA Recipe</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">956</span>)</span>
@@ -410,7 +410,7 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 </section>
 <section id="apply-the-recipe" class="level2">
-<h2 class="anchored" data-anchor-id="apply-the-recipe">5.2 Apply the Recipe</h2>
+<h2 class="anchored" data-anchor-id="apply-the-recipe">🔍 5.2 Apply the Recipe</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prep and apply the recipe</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>rna_pca_prep <span class="ot">&lt;-</span> <span class="fu">prep</span>(rna_pca_recipe, <span class="at">training =</span> expr_long)</span>
@@ -459,7 +459,7 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 </section>
 <section id="plot-the-percent-of-variance" class="level2">
-<h2 class="anchored" data-anchor-id="plot-the-percent-of-variance">5.3 Plot the Percent of Variance</h2>
+<h2 class="anchored" data-anchor-id="plot-the-percent-of-variance">🔍 5.3 Plot the Percent of Variance</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the percent of variance explained by each principal component</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>rna_pca_prep <span class="sc">%&gt;%</span></span>
@@ -484,7 +484,7 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 </section>
 <section id="plot-pca" class="level2">
-<h2 class="anchored" data-anchor-id="plot-pca">5.4 Plot PCA</h2>
+<h2 class="anchored" data-anchor-id="plot-pca">🔍 5.4 Plot PCA</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract variance explained by PC1 and PC2</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>explained_var <span class="ot">&lt;-</span> rna_pca_prep <span class="sc">%&gt;%</span></span>
@@ -518,7 +518,7 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 <h2 class="anchored" data-anchor-id="which-genes-on-chromosome-12-are-most-updownregulated">6 Which genes on Chromosome 12 are most up/downregulated?</h2>
 </section>
 <section id="volcano-plot-of-ch-12" class="level2">
-<h2 class="anchored" data-anchor-id="volcano-plot-of-ch-12">6.1 Volcano plot of ch-12</h2>
+<h2 class="anchored" data-anchor-id="volcano-plot-of-ch-12">🔍 6.1 Volcano plot of ch-12</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Filter only Chromosome 12 genes</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>chr12_genes <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
