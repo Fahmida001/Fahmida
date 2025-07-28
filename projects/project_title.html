@@ -151,9 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><strong>Project Overview</strong></a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><img src="Bulk.png" class="img-fluid quarto-figure quarto-figure-center" style="width:60.0%"></a></li>
-  <li><a href="#load-and-preview-the-rna-seq-dataset" id="toc-load-and-preview-the-rna-seq-dataset" class="nav-link" data-scroll-target="#load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</a></li>
-  <li><a href="#summarize-dataset" id="toc-summarize-dataset" class="nav-link" data-scroll-target="#summarize-dataset">Summarize Dataset</a></li>
+  <li><a href="#glimpse-at-the-rna-seq-data" id="toc-glimpse-at-the-rna-seq-data" class="nav-link" data-scroll-target="#glimpse-at-the-rna-seq-data"><strong>Glimpse at the RNA-seq Data</strong></a></li>
   <li><a href="#which-genes-on-chromosome-12-are-most-updownregulated" id="toc-which-genes-on-chromosome-12-are-most-updownregulated" class="nav-link" data-scroll-target="#which-genes-on-chromosome-12-are-most-updownregulated">Which genes on Chromosome 12 are most up/downregulated?</a></li>
   <li><a href="#what-are-the-top-10-most-dysregulated-genes-on-chr12" id="toc-what-are-the-top-10-most-dysregulated-genes-on-chr12" class="nav-link" data-scroll-target="#what-are-the-top-10-most-dysregulated-genes-on-chr12">What are the top 10 most dysregulated genes on Chr12?</a></li>
   </ul>
@@ -210,11 +208,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 <hr>
-<p>##<strong>Procedure</strong></p>
-<p>I performed bulk RNA sequencing (RNA-seq) on human induced pluripotent stem cells (iPSCs) with disomic and trisomic chromosome 12 to investigate transcriptomic differences associated with gene dosage. Total RNA was extracted from both cell types and sequenced using high-throughput methods. The resulting data is processed and analyzed to identify differentially expressed genes between trisomic and disomic ch-12 iPSCs.</p>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"><img src="Bulk.png" class="img-fluid quarto-figure quarto-figure-center" style="width:60.0%"></h2>
 <p>##<strong>Load Required Libraries</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse for wrangling, plotting, and file reading</span></span>
@@ -253,10 +246,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="load-and-preview-the-rna-seq-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</h2>
-<p>We load the CSV file using <code>read_csv()</code> and use <code>head()</code> and <code>glimpse()</code> to confirm successful import and examine the structure. The dataset <code>BulkRNAseq_with_Chr.csv</code> contains normalized expression values, fold changes, statistical test results, and chromosome annotations for over 12,000 genes. Below, we load the dataset and preview the first few rows to verify that it has been imported correctly.</p>
-<p>Glimpse at the Data</p>
+<section id="glimpse-at-the-rna-seq-data" class="level2">
+<h2 class="anchored" data-anchor-id="glimpse-at-the-rna-seq-data"><strong>Glimpse at the RNA-seq Data</strong></h2>
+<p>I have loaded the CSV file using read_csv() and use head() and glimpse() to confirm successful import and examine the structure of the dataset.</p>
+<p>The dataset BulkRNAseq_with_Chr.csv contains normalized gene expression values, log₂ fold changes, adjusted p-values, and chromosome annotations for over 12,000 genes from disomic and trisomic iPSCs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read CSV and preview first few rows</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
@@ -312,9 +305,7 @@ $ band            &lt;chr&gt; "q21", "q14.3", "q23.3", "p22.2", "q24.1", "p13.33
 $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "12",…</code></pre>
 </div>
 </div>
-</section>
-<section id="summarize-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="summarize-dataset">Summarize Dataset</h2>
+<p>##<strong>Summarize &amp; Interpret Dataset</strong></p>
 <section id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs" class="level3">
 <h3 class="anchored" data-anchor-id="a.-how-many-genes-are-upregulated-or-downregulated-in-trisomic-ipscs">A. How many genes are upregulated or downregulated in trisomic iPSCs?</h3>
 <p>We define significantly upregulated genes as those with log₂ fold change ≥ log₂(1.5) and FDR-adjusted p-value &lt; 0.05. Downregulated genes meet the same p-value threshold and log₂ fold change ≤ -log₂(1.5),comparing trisomic (P33_1, P33_2, P33_3) versus disomic (P3_1, P3_2, P3_3) iPSCs.</p>
