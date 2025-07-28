@@ -360,6 +360,7 @@ $ chromosome_name &lt;chr&gt; "6", "13", "8", "2", "16", "12", NA, "11", "12", "
 </section>
 <section id="b.-is-there-a-clear-clustering-of-ipscs-by-karyotype-trisomic-vs.-disomic-in-the-principal-component-space" class="level3">
 <h3 class="anchored" data-anchor-id="b.-is-there-a-clear-clustering-of-ipscs-by-karyotype-trisomic-vs.-disomic-in-the-principal-component-space">B. Is there a clear clustering of iPSCs by karyotype (trisomic vs.&nbsp;disomic) in the principal component space?</h3>
+<p>Prep the Data &amp; Build the PCA Recipe</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for reproducibility</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">956</span>)</span>
@@ -399,11 +400,13 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 <span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_normalize</span>(<span class="fu">all_predictors</span>()) <span class="sc">%&gt;%</span></span>
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_pca</span>(<span class="fu">all_predictors</span>(), <span class="at">id =</span> <span class="st">"pca"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Apply the Recipe</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prep and apply the recipe</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>rna_pca_prep <span class="ot">&lt;-</span> <span class="fu">prep</span>(rna_pca_recipe, <span class="at">training =</span> expr_long)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>rna_pca_bake <span class="ot">&lt;-</span> <span class="fu">bake</span>(rna_pca_prep, <span class="at">new_data =</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Variance Explained by Each PC</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View variable contributions to each PC</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rna_pca_prep <span class="sc">%&gt;%</span></span>
@@ -444,6 +447,7 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 # ℹ 14 more rows</code></pre>
 </div>
 </div>
+<p>Plot the Percent of Variance</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the percent of variance explained by each principal component</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>rna_pca_prep <span class="sc">%&gt;%</span></span>
@@ -466,6 +470,7 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 </div>
 </div>
+<p>Plot PCA</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract variance explained by PC1 and PC2</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>explained_var <span class="ot">&lt;-</span> rna_pca_prep <span class="sc">%&gt;%</span></span>
