@@ -154,6 +154,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#load-required-libraries" id="toc-load-required-libraries" class="nav-link" data-scroll-target="#load-required-libraries">Load Required Libraries</a></li>
   <li><a href="#load-and-preview-the-rna-seq-dataset" id="toc-load-and-preview-the-rna-seq-dataset" class="nav-link" data-scroll-target="#load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</a></li>
   <li><a href="#summarize-dataset" id="toc-summarize-dataset" class="nav-link" data-scroll-target="#summarize-dataset">Summarize Dataset</a></li>
+  <li><a href="#which-genes-on-chromosome-12-are-most-updownregulated" id="toc-which-genes-on-chromosome-12-are-most-updownregulated" class="nav-link" data-scroll-target="#which-genes-on-chromosome-12-are-most-updownregulated">Which genes on Chromosome 12 are most up/downregulated?</a></li>
+  <li><a href="#what-are-the-top-10-most-dysregulated-genes-on-chr12" id="toc-what-are-the-top-10-most-dysregulated-genes-on-chr12" class="nav-link" data-scroll-target="#what-are-the-top-10-most-dysregulated-genes-on-chr12">What are the top 10 most dysregulated genes on Chr12?</a></li>
   </ul>
 </nav>
     </div>
@@ -487,8 +489,11 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 </div>
 </section>
-<section id="c.-volcano-plot-for-ch-12" class="level3">
-<h3 class="anchored" data-anchor-id="c.-volcano-plot-for-ch-12">C. Volcano plot for ch-12</h3>
+</section>
+<section id="which-genes-on-chromosome-12-are-most-updownregulated" class="level2">
+<h2 class="anchored" data-anchor-id="which-genes-on-chromosome-12-are-most-updownregulated">Which genes on Chromosome 12 are most up/downregulated?</h2>
+<section id="c.-volcano-plot-of-ch-12" class="level3">
+<h3 class="anchored" data-anchor-id="c.-volcano-plot-of-ch-12">C. Volcano plot of ch-12</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Filter only Chromosome 12 genes</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>chr12_genes <span class="ot">&lt;-</span> rna <span class="sc">%&gt;%</span></span>
@@ -527,6 +532,10 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="what-are-the-top-10-most-dysregulated-genes-on-chr12" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-the-top-10-most-dysregulated-genes-on-chr12">What are the top 10 most dysregulated genes on Chr12?</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 upregulated genes</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>top_up <span class="ot">&lt;-</span> chr12_genes <span class="sc">%&gt;%</span></span>
@@ -596,7 +605,6 @@ dbl (15): baseMean, baseMeanA, baseMeanB, foldChange, log2FoldChange, lfcSE,...
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
