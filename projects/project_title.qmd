@@ -256,7 +256,6 @@ top_genes_table
 
 ```
 ```{r}
-library(ggplot2)
 library(forcats)
 library(dplyr)
 
@@ -271,7 +270,7 @@ ggplot(top_genes_plot, aes(x = gene_symbol, y = log2FoldChange, fill = Direction
   coord_flip() +
   scale_fill_manual(values = c("Upregulated" = "magenta", "Downregulated" = "blue")) +
   labs(
-    title = "Top Upregulated and Downregulated Chromosome 12 Genes",
+    title = "Top Upregulated and Downregulated Chr-12 Trisomic iPSC Genes",
     x = "Gene Symbol",
     y = "Log2 Fold Change"
   ) +
@@ -279,4 +278,5 @@ ggplot(top_genes_plot, aes(x = gene_symbol, y = log2FoldChange, fill = Direction
 
 
 ```
+
 
