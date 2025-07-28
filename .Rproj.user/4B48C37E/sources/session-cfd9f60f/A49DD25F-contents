@@ -104,6 +104,7 @@ ggplot(reg_summary, aes(x = chromosome_name, y = n, fill = Regulation)) +
 
 ### B. Is there a clear clustering of iPSCs by karyotype (trisomic vs. disomic) in the principal component space?
 
+Prep the Data & Build the PCA Recipe
 ```{r}
 
 # Set a seed for reproducibility
@@ -137,6 +138,8 @@ rna_pca_recipe <- recipe(~ ., data = expr_long) %>%
   step_pca(all_predictors(), id = "pca")
 
 ```
+Apply the Recipe
+
 ```{r}
 # Prep and apply the recipe
 rna_pca_prep <- prep(rna_pca_recipe, training = expr_long)
@@ -144,6 +147,7 @@ rna_pca_bake <- bake(rna_pca_prep, new_data = NULL)
 
 ```
 
+Variance Explained by Each PC
 ```{r}
 # View variable contributions to each PC
 rna_pca_prep %>%
@@ -155,7 +159,7 @@ rna_pca_prep %>%
 
 ```
 
-
+Plot the Percent of Variance
 
 ```{r}
 # Plot the percent of variance explained by each principal component
@@ -174,6 +178,8 @@ rna_pca_prep %>%
 
 
 ```
+Plot PCA
+
 ```{r}
 
 # Extract variance explained by PC1 and PC2
