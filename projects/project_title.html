@@ -151,6 +151,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul class="collapse">
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview"><strong>Project Overview</strong></a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><img src="Bulk.png" class="img-fluid quarto-figure quarto-figure-center" style="width:60.0%"></a></li>
   <li><a href="#load-and-preview-the-rna-seq-dataset" id="toc-load-and-preview-the-rna-seq-dataset" class="nav-link" data-scroll-target="#load-and-preview-the-rna-seq-dataset">Load and Preview the RNA-seq Dataset</a></li>
   <li><a href="#summarize-dataset" id="toc-summarize-dataset" class="nav-link" data-scroll-target="#summarize-dataset">Summarize Dataset</a></li>
   <li><a href="#which-genes-on-chromosome-12-are-most-updownregulated" id="toc-which-genes-on-chromosome-12-are-most-updownregulated" class="nav-link" data-scroll-target="#which-genes-on-chromosome-12-are-most-updownregulated">Which genes on Chromosome 12 are most up/downregulated?</a></li>
@@ -208,13 +209,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="trisomy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
 </figure>
 </div>
+<hr>
 <p>##<strong>Procedure</strong></p>
 <p>I performed bulk RNA sequencing (RNA-seq) on human induced pluripotent stem cells (iPSCs) with disomic and trisomic chromosome 12 to investigate transcriptomic differences associated with gene dosage. Total RNA was extracted from both cell types and sequenced using high-throughput methods. The resulting data is processed and analyzed to identify differentially expressed genes between trisomic and disomic ch-12 iPSCs.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="Bulk.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
-</figure>
-</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"><img src="Bulk.png" class="img-fluid quarto-figure quarto-figure-center" style="width:60.0%"></h2>
 <p>##<strong>Load Required Libraries</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load tidyverse for wrangling, plotting, and file reading</span></span>
